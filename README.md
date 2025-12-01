@@ -1,0 +1,175 @@
+# The DeFi Landscape Map
+A high-level map of the DeFi ecosystem organized by category, purpose, and major protocols.
+
+| Lending & Borrowing | DEX / AMMs | Derivatives & Perpetuals | Stablecoins | Bridges & Interop | Yield Aggregation / Vaults | Restaking & AVS | Oracles | Liquid Staking & LSDfi | RWA | Insurance / Risk Markets | MEV & Execution Layer Products | Infrastructure Middleware | Account Abstraction / Smart Wallets | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [Money Markets](./Lending&Borrowing.md), [Isolated Lending Markets](./Lending_Borrowing/IsolatedLendingMarkets.md) | [CLMM](./DEX_AMM/CLMM.md), [CPMM](./DEX_AMM/CPMM.md), [Curve-StableSwap](./DEX_AMM/CurveStyleStableswap.md), [Intent Based](./DEX_AMM/Intent_based_RFQ.md) | [Options](./Derivatives_Perps/Options.md), [Perps](./Derivatives_Perps/Perps.md), [Structured Products](./Derivatives_Perps/StructuredProducts.md) | [Algorithmic/Hybrid](./Stablecoins/AlgorithmicHybrid.md), [Fiat Backed](./Stablecoins/FiatBacked.md), [Overcollateralized](./Stablecoins/Overcollateralized.md) | [Light Client / ZK](./Bridges_Interoperability/Light_client_zk.md), [Messaging](./Bridges_Interoperability/Messaging.md) | [All](./Yield%20Aggregators_Vaults/All.md) | [All](./Restaking_AVS/All.md) | [All](./Oracles/All.md) | [LSDfi](./Liquid%20Staking_LSDfi/LSDfi.md), [LST Providers](./Liquid%20Staking_LSDfi/) | N/A | [All](./Insurance_Risk%20Markets/All.md) | [All](./MEV_Execution%20Layer/All.md) | [All](./Infrastructure_Middleware/All.md) | [All](./Account%20Abstraction%20_Smart%20Wallets/All.md) |
+
+## Definitions
+### Lending & Borrowing
+**Definition:** Protocols that allow users to deposit assets to earn yield (lending) and borrow assets by providing collateral. They create decentralized credit markets where interest rates adjust algorithmically based on supply and demand.
+
+**Why it exists:** To enable capital efficiency in DeFi: users can access liquidity without selling assets, leverage positions, or earn passive yield. Borrowers get liquidity; lenders get interest; the protocol acts as a trustless intermediary.
+
+**Key mechanics:** 
+- *Collateralized borrowing*: Users deposit tokens as collateral and can borrow up to a protocol-defined limit (LTV / collateral factor).
+- *Interest rate models*: Dynamic rates (often kink-based) adjust based on utilization of each asset pool. 
+- *Liquidation engine*: If a borrower’s health factor drops below a threshold, positions are liquidated by external liquidators or internal mechanisms. 
+- *Oracle pricing*: Asset prices come from price feeds (Chainlink, Pyth, etc.) to determine collateral value.
+- *Pool architectures*:
+    - *Pooled lending*: All lenders share liquidity (Aave, Compound).
+    - *Peer-to-pool optimization*: Routing deposits to improve yields (Morpho).
+    - *Isolated pools*: Risk-limited markets for volatile assets (Fraxlend, Silo)
+
+**Major risks:**
+- *Oracle manipulation*: Fake price feeds can enable undercollateralized borrowing and bad debt.  
+- *Liquidation failures*: Congestion or MEV effects can prevent timely liquidations.
+- *Interest rate model bugs*: Incorrect math can cause runaway rates or frozen markets.
+- *Bad collateral onboarding*: Listing risky assets can introduce systemic insolvency.
+- *Reentrancy & accounting bugs*: Incorrect balance updates or rounding errors can allow fund theft or break invariants.
+- *Cross-asset contagion*: Shared collateral pools can propagate insolvency across assets.
+
+---
+
+### DEX / AMMs
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Derivatives & Perpetuals
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Stablecoins
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Bridges & Interop
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Yield Aggregation / Vaults
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Restaking & AVS 
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Oracles
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Liquid Staking & LSDfi
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### RWA
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Insurance / Risk Markets
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### MEV & Execution Layer Products
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Infrastructure Middleware
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
+
+### Account Abstraction / Smart Wallets
+**Definition:**  
+
+**Why it exists:** 
+
+**Key mechanics:** 
+
+**Major risks:**
+
+---
