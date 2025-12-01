@@ -32,13 +32,40 @@ A high-level map of the DeFi ecosystem organized by category, purpose, and major
 ---
 
 ### DEX / AMMs
-**Definition:**  
+**Definition:** Decentralized exchanges (DEX) that allow trustless trading of assets by using algorithmic pricing rather than order books. Liquidity is provided by users (LPs) and trades are executed directly on-chain or via intent/RFQ systems.
 
-**Why it exists:** 
+**Why it exists:** To enable permissionless, always-on trading without centralized intermediaries. AMMs solve the order book liquidity problem on blockchains by replacing market makers with mathematical pricing curves and incentivized liquidity providers.
 
 **Key mechanics:** 
+- *Pricing curves*:
+    - Constant Product (x*y=k) — Uniswap V2, many forks
+    - Concentrated Liquidity (CLMM)— Uniswap V3, Algebra
+    - Stableswap (low slippage around a peg) — Curve
+    - Custom / Hybrid curves — Maverick, Balancer
+
+- *Liquidity pools*: Users deposit token pairs or baskets and earn trading fees (and sometimes emissions). The pool’s invariant defines how prices move as reserves change.
+
+- *Swapping*:
+    - Traders swap one asset for another by interacting with the pool, changing reserves and implicitly adjusting price.
+    - Multihop routing allows trades across multiple pools.
+
+- *Fees & incentives*:
+    - Swap fees distributed to LPs.
+    - Optional liquidity mining or boosted curves.
+
+- *Advanced DEX architectures*:
+    - Intent-based / RFQ - Traders express “what they want”, solvers fill the order (CowSwap, UniswapX, 1inch Fusion).
+    - Hybrid AMMs - Combine concentrated liquidity, dynamic curves, or external price data for improved efficiency.
 
 **Major risks:**
+- *Price manipulation*: AMMs are highly manipulable within single blocks — used to exploit lending protocols, oracles, or pool accounting.
+- *Impermanent loss*: LPs can lose value relative to holding assets, especially during high volatility.
+- *Invariant violations / math bugs*: Rounding errors, unsafe math, or broken invariant logic can cause value leakage or pool insolvency.
+- *Liquidity migration or fragmentation*: Liquidity spread across chains/pools reduces efficiency and increases oracle attack surface.
+- *Concentrated liquidity risks*: 
+    - Mispositioned liquidity, toxic flow, or tick math bugs.
+    - Incorrect handling of range orders or tick crossing.
+- *Flash loan interactions*: AMM state can be fully manipulated inside a single transaction, interacting dangerously with protocols using AMM prices.
 
 ---
 
