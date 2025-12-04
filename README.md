@@ -110,24 +110,127 @@ A high-level map of the DeFi ecosystem organized by category, purpose, and major
 ---
 
 ### Stablecoins
-**Definition:**  
+**Definition:** Tokens designed to maintain a stable value (usually pegged to USD) through collateralization, algorithmic mechanisms, or backing by real-world assets. They serve as the primary unit of account and liquidity foundation in DeFi.
 
-**Why it exists:** 
+**Why it exists:** Stablecoins provide price stability in an otherwise volatile crypto environment, enabling predictable trading, borrowing, lending, and payments. They act as the settlement layer for most DeFi transactions and are essential for risk management, on-chain liquidity, and capital efficiency.
 
 **Key mechanics:** 
+- *Overcollateralized (Crypto-Backed)*:
+    - Users deposit volatile assets (ETH, BTC, LSDs) and mint stablecoins against them.
+    - Stability enforced via liquidation systems and interest/stability fees.
+    - Examples: MakerDAO (DAI), Liquity (LUSD).
+
+- *Algorithmic / Hybrid Models*: 
+    - Use on-chain algorithms, bonding curves, or multi-token systems to maintain peg.
+    - Frax uses fractional collateral + algorithmic supply adjustment.
+    - Historically the riskiest category.
+
+- *Fiat-Backed / Custodial*:
+    - Backed 1:1 by off-chain assets (USD reserves, treasuries).
+    - Requires trust in issuers and custodians; highly scalable.
+    - Examples: USDC, USDT, PYUSD.
+
+- *Stability Mechanisms*:
+    - Collateral ratios / LTVs determine minting capacity.
+    - Liquidations ensure solvency when collateral value drops.
+    - Oracle feeds provide price data for collateral and redemption.
+    - Redemption mechanisms allow arbitrage when price diverges from $1.
+    - Stability fees / interest influence supply/demand dynamics.
+
+- *Peg Maintenance Tools*:
+    - Arbitrage incentives (mint/burn, redeem).
+    - Market operations (buyback/burn, yield adjustments).
+    - Risk modules for collateral onboarding.
 
 **Major risks:**
+- *Collateral risk*:
+    - Crypto-backed stables depend on volatile collateral.
+    - Bad collateral onboarding can lead to protocol insolvency.
+
+- *Oracle manipulation*: Mispriced collateral → undercollateralized minting → bad debt.
+
+- *Depegging events*:
+    - Liquidity holes or bank-run dynamics can break the $1 peg.
+    - Historical failures: UST, FEI (partial), USDC depeg during banking crisis.
+
+- *Redemption mechanism failures*: If redemption is paused, slow, or too costly, peg can’t be restored.
+
+- *Custodial/Regulatory risk (Fiat-backed)*: Bank failures, frozen reserves, regulatory actions.
+
+- *Algorithmic instability:* 
+    - Reflexive feedback loops can cause death spirals.  
+    - Difficult to verify mathematically; dynamic systems are fragile.
+
+- *Liquidity fragmentation*: Peg maintenance becomes harder when liquidity is spread across chains or pools.
+
+- *Systemic risk propagation*: Stablecoin failures often cascade across DeFi (AMMs, lending, perps, collateralized systems).
 
 ---
 
-### Bridges & Interop
+### Bridges & Interoperability
+
 **Definition:**  
+Protocols that enable the transfer of data, messages, or assets across different blockchains. They act as communication layers that allow cross-chain tokens, state synchronization, and multi-chain applications.
 
-**Why it exists:** 
+**Why it exists:**  
+Because blockchains are isolated environments with no native way to trust information from other chains. Bridges allow liquidity, applications, and users to move freely across ecosystems, enabling multi-chain DeFi, shared liquidity, modular architectures, and unified user experiences.
 
-**Key mechanics:** 
+**Key mechanics:**  
+- *Message Passing*: 
+  - Bridges relay arbitrary messages (not just tokens) between chains.  
+  - Used for cross-chain governance, swaps, and multi-chain app logic.  
+  - Examples: LayerZero, Wormhole, Axelar.
 
-**Major risks:**
+- *Light Client / Verification-Based Bridges*:
+  - One chain verifies the consensus of another chain (e.g., zk/light-client bridges).  
+  - Highest security because no external trust is required.  
+  - Examples: zkSync zkBridge, Succinct-built bridges.
+
+- *Lock-and-Mint / Burn-and-Mint Models*:
+  - Assets are locked on the source chain and minted on the destination chain.  
+  - On return, wrapped tokens are burned and underlying assets released.  
+  - Common for older or simpler bridges.
+
+- *Validator / Relayer Sets*:
+  - Off-chain entities observe chain A and submit proofs or attestations to chain B.  
+  - Security depends on the honesty threshold of the committee.
+
+- *Unified Liquidity Networks*:
+  - Liquidity providers facilitate cross-chain swaps without locking assets.  
+  - Examples: Stargate (powered by LayerZero), Connext (before pivot).
+
+- *Security Models*:
+  - Verification-based: chain verifies the state transition proofs (safest).  
+  - External validator sets: rely on multisigs or committees.  
+  - Optimistic verification: assume correctness unless challenged.  
+  - Liquidity networks: rely on LP honesty + slippage controls.
+
+**Major risks:**  
+- *Bridge hacks (most common failure in crypto)*:
+  - Over $2B+ lost historically due to compromised validator sets or multisig keys.  
+  - Example: Ronin, Wormhole (later reimbursed), Nomad.
+
+- *Message forgery / replay attacks:*
+  - Incorrect or missing signature verification.  
+  - Poor nonce or state tracking leads to duplicated or forged messages.
+
+- *Light client implementation bugs:* 
+  - Incorrect consensus verification logic can break trust assumptions.
+
+- *Liquidity exhaustion / trapped funds:*
+  - Lock-and-mint designs rely heavily on proper accounting of minted vs. locked tokens.
+
+- *Cross-chain reentrancy:*
+  - Bridged contracts can cause asynchronous execution attacks.
+
+- *Incorrect assumptions about finality:*  
+  - Fast chains may reorganize, breaking message integrity.
+
+- *Wrapped asset risk:* 
+  - If the original chain or bridge fails, wrapped tokens can become worthless.
+
+- *Inter-protocol contagion:*  
+  - A bridge compromise can cascade across all protocols using the bridged asset.
 
 ---
 
