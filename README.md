@@ -288,13 +288,58 @@ Because blockchains are isolated environments with no native way to trust inform
 ---
 
 ### Restaking & AVS 
-**Definition:**  
+**Definition:** Protocols that allow users to stake assets (primarily ETH or ETH-derived tokens) while retaining liquidity or reusing the same economic security across multiple systems. Liquid Staking Derivatives (LSDs) tokenize staked positions, while restaking protocols extend staked security to additional services (AVSs).
 
-**Why it exists:** 
+**Why it exists:** Staking traditionally locks capital and limits composability. LSDs unlock liquidity by issuing transferable tokens that represent staked assets. Restaking further increases capital efficiency by allowing the same staked ETH to secure multiple protocols, creating shared security layers and new economic primitives.
 
 **Key mechanics:** 
+- *Liquid Staking (LSDs)*:
+  - Users stake ETH via a protocol and receive a liquid token (e.g., stETH, rETH, eETH).
+  - The token accrues staking rewards and can be used as collateral across DeFi.
+  - Unstaking may involve delays or exit queues.
+
+- *Restaking*:
+  - LSDs or native ETH are restaked to secure additional services (AVSs — Actively Validated Services).
+  - Validators opt into extra slashing conditions beyond Ethereum consensus.
+
+- *Reward Distribution*:
+  - Rewards come from Ethereum staking + AVS fees or emissions.
+  - Protocols must accurately track yield across layers and distribute it to holders.
+
+- *Slashing & Risk Attribution*:
+  - Misbehavior at any layer (Ethereum or AVS) can result in slashing. 
+  - Risks compound across stacked services.
+
+- *Delegation & Operator Sets*:
+  - Validators or operators manage restaked capital.
+  - Users delegate stake and rely on operator performance and honesty.
+
+- *LSDfi*: Derivative protocols built on LSDs (e.g., Pendle, Lybra, Prisma) provide leverage, yield splitting, or stablecoins.
 
 **Major risks:**
+- *Risk stacking / correlated slashing*:
+  - Multiple AVSs can slash the same underlying stake, amplifying losses.
+  - Hard to reason about tail risk and correlated failures.
+
+- *Slash condition complexity*:
+  - Slashing logic is protocol-specific and difficult to formally reason about.
+  - Errors in slash attribution can unjustly penalize users.
+
+- *Accounting & reward bugs*: Incorrect reward calculation or distribution across layers can cause silent value leakage.
+
+- *Liquidity illusions*: 
+  - LSDs appear liquid but often rely on exit queues or secondary market liquidity. 
+  - During stress, liquidity can vanish.
+
+- *Oracle dependency*:
+  - LSD prices rely on oracles or assumptions about redemption value.
+  - Depegs can cascade across lending and derivatives protocols.
+
+- *Validator and operator risk*: Centralization or misbehavior of operators can jeopardize funds.
+
+- *Composable contagion*: LSDs are widely used as collateral, making failures systemic.
+
+- *Governance & upgrade risk*: Rapid evolution of restaking designs increases upgrade frequency and attack surface.
 
 ---
 
