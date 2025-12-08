@@ -235,13 +235,55 @@ Because blockchains are isolated environments with no native way to trust inform
 ---
 
 ### Yield Aggregation / Vaults
-**Definition:**  
+**Definition:** Protocols that automatically allocate user funds across multiple DeFi strategies to maximize yield, manage risk, or optimize capital efficiency. Users deposit assets into vaults and receive shares representing proportional ownership of the underlying strategies.
 
-**Why it exists:** 
+**Why it exists:** Because actively managing yield in DeFi is complex, time-consuming, and gas-intensive. Yield aggregators abstract strategy selection, compounding, and rebalancing, allowing users to earn optimized returns without manual intervention.
 
 **Key mechanics:** 
+- *Vault shares*:
+  - Depositors receive shares representing a claim on the vault’s assets.
+  - Share price increases as yield is generated.
+
+- *Strategies*:
+  - Vaults deploy capital into one or more strategies (lending, AMMs, staking, farming).
+  - Strategies can be upgraded, rotated, or paused based on performance or risk.
+
+- *Auto-compounding*: Rewards are periodically harvested and reinvested to increase effective APY.
+
+- *Allocation logic*: Capital may be split dynamically across strategies based on utilization, risk limits, or governance decisions.
+
+- *Role separation*:
+  - Vault handles deposits, withdrawals, accounting.
+  - Strategy contracts interact with external protocols.
+
+- *Governance & permissions*:
+  - Strategy changes often gated by multisigs or DAOs.
+  - Emergency shutdown mechanisms are common.
+
+- *Composable primitives*: Strategies may stack multiple protocols (e.g., deposit → lend → LP → stake LP → borrow → loop).
 
 **Major risks:**
+- *Composability risk*:
+  - Vaults inherit all risks of underlying protocols (lending, AMMs, bridges, oracles).
+  - A bug in any dependency can break the system.
+
+- *Share accounting bugs*:
+  - Incorrect mint/burn logic can allow value extraction or dilution of other users.
+  - Rounding issues during deposits/withdrawals are especially dangerous.
+
+- *Strategy misbehavior*:
+  - Strategies returning incorrect values can corrupt vault accounting.
+  - Lack of invariants around totalAssets vs shares is a common failure mode.
+
+- *Reentrancy via external protocols*: External calls during harvests, deposits, or withdrawals can be exploited.
+
+- *Liquidity mismatch*: Vault assets may be locked, staked, or illiquid, causing withdrawal failures under stress.
+
+- *Governance attack risk*: Malicious or compromised governance can swap strategies and drain funds.
+
+- *Upgrade & emergency logic bugs*: Emergency shutdowns are rarely tested but used during crisis situations.
+
+- *Economic griefing*: MEV front-running deposits/withdrawals to extract value from vault share math.
 
 ---
 
