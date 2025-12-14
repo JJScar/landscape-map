@@ -344,14 +344,50 @@ Because blockchains are isolated environments with no native way to trust inform
 ---
 
 ### Oracles
-**Definition:**  
+**Definition:** Protocols that provide external data (such as asset prices, interest rates, or events) to smart contracts. Oracles act as the bridge between on-chain logic and off-chain information that blockchains cannot access natively.
 
-**Why it exists:** 
+**Why it exists:** Blockchains are deterministic and isolated by design, meaning they cannot directly observe real-world data. Oracles enable DeFi protocols to safely reference external information—most critically asset prices—making lending, derivatives, stablecoins, and liquidations possible.
 
 **Key mechanics:** 
+- *Price Feeds*:
+  - Aggregate price data from multiple sources (CEXs, DEXs, market makers).
+  - Provide standardised interfaces for on-chain consumption. 
+
+- *Update Models*: 
+  - Push-based - Oracles push updates on a fixed schedule or when thresholds are crossed (Chainlink).
+  - Pull-based - Protocols fetch prices when needed, often with signed off-chain data (Pyth, Redstone).
+
+- *Aggregation & Validation*:
+  - Prices are aggregated using medians, TWAPs, or weighted averages.
+  - Outliers are filtered to reduce manipulation.
+
+- *Trust & Security Models*:  
+  - Decentralized node networks - Multiple independent operators submit prices.  
+  - Publisher-based feeds - Trusted data publishers sign prices.  
+  - DEX-based oracles - Prices derived from on-chain liquidity (Uniswap TWAPs).
+
+- *Finality & Latency*:
+  - Tradeoff between fast updates and manipulation resistance.  
+  - Critical during high volatility events.
+
+- *Non-Price Oracles*: Randomness (VRF), proof-of-reserves, cross-chain messages, governance signals.
 
 **Major risks:**
+- *Price manipulation*: Thin liquidity or short TWAP windows can allow attackers to manipulate prices temporarily.
 
+- *Latency & stale data*: Delayed updates can cause incorrect liquidations, unfair trades, or protocol insolvency.
+
+- *Oracle dependency concentration*: Many protocols rely on the same oracle provider, creating systemic risk.
+
+- *Incorrect assumptions by consuming protocols*:
+  - Using spot prices instead of TWAPs.  
+  - Assuming oracle prices are unmanipulable within a single block.
+
+- *Circuit breaker failures*: Missing or misconfigured bounds can allow extreme or invalid prices.
+
+- *Cross-domain misuse*: Using an oracle designed for one purpose (e.g., trading) in another (e.g., lending) without proper safeguards.
+
+- *Composable attack surfaces*: Oracle prices interacting with AMMs, lending, perps, and liquidations in the same transaction enable complex exploits.
 ---
 
 ### Liquid Staking & LSDfi
